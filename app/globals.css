@@ -26,7 +26,7 @@
   --page-padding-right: max(var(--spacing-page), var(--safe-right));
   --nav-height: 3.75rem;
   --nav-total-height: calc(env(safe-area-inset-top, 0px) + var(--nav-height));
-  --main-pt: calc(var(--nav-total-height) + 0.75rem);
+  --main-pt: calc(var(--nav-total-height) + 1.25rem);
 }
 
 * {

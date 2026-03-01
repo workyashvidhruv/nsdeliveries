@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { createClient } from '@/lib/supabase/client';
+import { useAccount, useConnect } from 'wagmi';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card } from '@/components/ui/card';
@@ -25,6 +26,14 @@ export default function ProfilePage() {
   const [earnings, setEarnings] = useState<{ total: number; processing: number; paid: number }>({ total: 0, processing: 0, paid: 0 });
   const supabase = createClient();
   const router = useRouter();
+  const { address, isConnected } = useAccount();
+  const { connectAsync, connectors } = useConnect();
+
+  useEffect(() => {
+    if (isConnected && address) {
+      setProfile((p) => ({ ...p, crypto_wallet: address, crypto_chain: p.crypto_chain || 'base' }));
+    }
+  }, [isConnected, address]);
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -116,46 +125,46 @@ export default function ProfilePage() {
   }
 
   return (
-    <div className="space-y-10 sm:space-y-12 w-full max-w-2xl mx-auto">
-      <div>
-        <h1 className="text-3xl sm:text-4xl font-bold tracking-tight">Profile</h1>
-        <p className="text-[var(--secondary-foreground)] mt-3 text-base sm:text-lg">
+    <div className="space-y-8 w-full max-w-2xl mx-auto pt-4">
+      <div className="space-y-1">
+        <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">Profile</h1>
+        <p className="text-[var(--secondary-foreground)] text-sm sm:text-base">
           Manage your account settings
         </p>
       </div>
 
-      <Card className="space-y-6">
-        <h2 className="font-semibold text-lg sm:text-xl">Delivery earnings</h2>
-        <div className="grid grid-cols-3 gap-4 text-center">
+      <Card className="space-y-5">
+        <h2 className="font-semibold text-base">Delivery earnings</h2>
+        <div className="grid grid-cols-3 gap-3 text-center">
           <div>
-            <p className="text-xs sm:text-sm text-[var(--muted)] uppercase tracking-wide">Total earned</p>
-            <p className="text-xl sm:text-2xl font-bold text-[var(--foreground)] mt-1">{formatCurrency(earnings.total)}</p>
+            <p className="text-xs text-[var(--muted)] uppercase tracking-wide">Total earned</p>
+            <p className="text-lg font-bold text-[var(--foreground)] mt-0.5">{formatCurrency(earnings.total)}</p>
           </div>
           <div>
-            <p className="text-xs sm:text-sm text-[var(--muted)] uppercase tracking-wide">Processing</p>
-            <p className="text-xl sm:text-2xl font-bold text-[var(--warning)] mt-1">{formatCurrency(earnings.processing)}</p>
+            <p className="text-xs text-[var(--muted)] uppercase tracking-wide">Processing</p>
+            <p className="text-lg font-bold text-[var(--warning)] mt-0.5">{formatCurrency(earnings.processing)}</p>
           </div>
           <div>
-            <p className="text-xs sm:text-sm text-[var(--muted)] uppercase tracking-wide">Paid out</p>
-            <p className="text-xl sm:text-2xl font-bold text-[var(--success)] mt-1">{formatCurrency(earnings.paid)}</p>
+            <p className="text-xs text-[var(--muted)] uppercase tracking-wide">Paid out</p>
+            <p className="text-lg font-bold text-[var(--success)] mt-0.5">{formatCurrency(earnings.paid)}</p>
           </div>
         </div>
-        <p className="text-sm text-[var(--muted)]">
-          After each delivery, your earnings are automatically sent to your wallet below (minus 5% platform fee). Make sure your wallet is set up to receive payouts.
+        <p className="text-xs text-[var(--muted)]">
+          Earnings are sent to your wallet below (minus 5% platform fee).
         </p>
       </Card>
 
-      <Card className="space-y-8">
-        <h2 className="font-semibold text-lg sm:text-xl">Personal Info</h2>
+      <Card className="space-y-6">
+        <h2 className="font-semibold text-base">Personal info</h2>
         <Input
           id="nsName"
-          label="NS Name"
+          label="Name"
           value={profile.ns_name}
           onChange={(e) => setProfile({ ...profile, ns_name: e.target.value })}
         />
         <Input
           id="phone"
-          label="Phone Number"
+          label="Phone number"
           value={profile.phone}
           onChange={(e) => setProfile({ ...profile, phone: e.target.value })}
         />
@@ -165,17 +174,17 @@ export default function ProfilePage() {
           value={profile.discord_id}
           onChange={(e) => setProfile({ ...profile, discord_id: e.target.value })}
         />
-        <div className="grid grid-cols-2 gap-5">
+        <div className="grid grid-cols-2 gap-4">
           <Input
             id="wing"
-            label="Building Wing"
+            label="Building wing"
             placeholder="e.g. Wing A"
             value={profile.building_wing}
             onChange={(e) => setProfile({ ...profile, building_wing: e.target.value })}
           />
           <Input
             id="room"
-            label="Room Number"
+            label="Room number"
             placeholder="e.g. 1234"
             value={profile.room_number}
             onChange={(e) => setProfile({ ...profile, room_number: e.target.value })}
@@ -183,54 +192,72 @@ export default function ProfilePage() {
         </div>
       </Card>
 
-      <Card className="space-y-8">
-        <div>
-          <h2 className="font-semibold text-lg sm:text-xl">Crypto Wallet</h2>
-          <p className="text-sm text-[var(--muted)] mt-2">Set up your wallet to receive delivery earnings in USDC. Payouts are sent automatically after each delivery.</p>
-        </div>
-
-        <div>
-          <label className="text-sm font-medium text-[var(--secondary-foreground)] mb-3 block">Chain</label>
-          <div className="grid grid-cols-3 gap-3 sm:gap-4">
-            {CRYPTO_CHAINS.map((chain) => (
-              <button
-                key={chain.id}
-                type="button"
-                onClick={() => setProfile({ ...profile, crypto_chain: chain.id })}
-                className={cn(
-                  'px-4 py-3 rounded-[var(--radius-sm)] text-sm font-medium border-2 transition-colors duration-200',
-                  profile.crypto_chain === chain.id
-                    ? 'border-white bg-white/5 text-white'
-                    : 'border-[var(--border)] text-[var(--secondary-foreground)] hover:border-[var(--muted)]'
-                )}
-              >
-                {chain.name}
-              </button>
-            ))}
+      <Card className="space-y-6">
+        <h2 className="font-semibold text-base">Crypto wallet</h2>
+        <p className="text-sm text-[var(--muted)]">
+          Connect your wallet to receive delivery earnings in USDC.
+        </p>
+        {isConnected && address ? (
+          <div className="space-y-4">
+            <div className="flex items-center justify-between text-sm">
+              <span className="text-[var(--muted)]">Address</span>
+              <span className="font-mono text-xs text-[var(--foreground)]">
+                {address.slice(0, 6)}...{address.slice(-4)}
+              </span>
+            </div>
+            <div>
+              <label className="text-sm font-medium text-[var(--secondary-foreground)] mb-2 block">Payout chain</label>
+              <div className="flex flex-wrap gap-2">
+                {CRYPTO_CHAINS.map((chain) => (
+                  <button
+                    key={chain.id}
+                    type="button"
+                    onClick={() => setProfile({ ...profile, crypto_chain: chain.id })}
+                    className={cn(
+                      'px-3 py-2 rounded-lg text-sm font-medium border transition-colors',
+                      profile.crypto_chain === chain.id
+                        ? 'border-white bg-white/5 text-white'
+                        : 'border-[var(--border)] text-[var(--muted)] hover:text-[var(--foreground)]'
+                    )}
+                  >
+                    {chain.name}
+                  </button>
+                ))}
+              </div>
+            </div>
+            <p className="text-xs text-[var(--muted)]">Wallet is connected. Save profile to use this address for payouts.</p>
           </div>
-        </div>
-        <Input
-          id="wallet"
-          label="Wallet Address"
-          placeholder="Enter your wallet address"
-          value={profile.crypto_wallet}
-          onChange={(e) => setProfile({ ...profile, crypto_wallet: e.target.value })}
-        />
+        ) : (
+          <Button
+            type="button"
+            variant="secondary"
+            className="w-full"
+            onClick={async () => {
+              setMessage('');
+              try {
+                await connectAsync({ connector: connectors[0] });
+              } catch (err: unknown) {
+                setMessage(err instanceof Error ? err.message : 'Failed to connect wallet');
+              }
+            }}
+          >
+            Connect wallet
+          </Button>
+        )}
       </Card>
 
       {message && (
-        <p className={cn('text-sm text-center py-2', message.includes('Failed') || message.includes('failed') ? 'text-[var(--danger)]' : 'text-[var(--success)]')}>
+        <p className={cn('text-sm text-center py-1', message.includes('Failed') || message.includes('failed') ? 'text-[var(--danger)]' : 'text-[var(--success)]')}>
           {message}
         </p>
       )}
 
-      <div className="space-y-4 pt-4">
+      <div className="space-y-3">
         <Button onClick={handleSave} loading={saving} className="w-full" size="lg">
-          Save Profile
+          Save profile
         </Button>
-
-        <Button variant="ghost" onClick={handleSignOut} className="w-full">
-          Sign Out
+        <Button variant="ghost" onClick={handleSignOut} className="w-full text-sm">
+          Sign out
         </Button>
       </div>
     </div>
