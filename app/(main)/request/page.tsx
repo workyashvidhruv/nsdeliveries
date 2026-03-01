@@ -45,7 +45,7 @@ export default function RequestPage() {
 
   // Wagmi hooks
   const { address, isConnected } = useAccount();
-  const { connect, connectors } = useConnect();
+  const { connectAsync, connectors } = useConnect();
   const { disconnect } = useDisconnect();
   const { writeContractAsync } = useWriteContract();
 
@@ -155,7 +155,14 @@ export default function RequestPage() {
                   {connectors.map((connector) => (
                     <Button
                       key={connector.uid}
-                      onClick={() => connect({ connector })}
+                      onClick={async () => {
+                        setError('');
+                        try {
+                          await connectAsync({ connector });
+                        } catch (err: any) {
+                          setError(err?.shortMessage || err?.message || 'Failed to connect wallet');
+                        }
+                      }}
                       className="w-full"
                       size="lg"
                     >
