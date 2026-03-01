@@ -135,10 +135,10 @@ export default function RequestPage() {
     const usdcAmount = (amount / 100).toFixed(2);
 
     return (
-      <div className="w-full max-w-2xl mx-auto space-y-8 sm:space-y-12">
-        <div className="text-center w-full space-y-3">
-          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight">Pay to Post Request</h1>
-          <p className="text-[var(--secondary-foreground)] text-base sm:text-lg">
+      <div className="w-full max-w-2xl mx-auto space-y-8">
+        <div className="text-center w-full space-y-2">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight mb-4">Pay to Post Request</h1>
+          <p className="text-[var(--secondary-foreground)] text-base sm:text-lg mb-2">
             {usdcAmount} USDC on Base
           </p>
         </div>
@@ -228,7 +228,7 @@ export default function RequestPage() {
               <Button
                 onClick={handleManualSubmit}
                 loading={loading}
-                className="w-full"
+                className="w-full mt-6"
                 size="lg"
                 disabled={!txHash.trim() || loading}
               >
@@ -255,17 +255,17 @@ export default function RequestPage() {
   }
 
   return (
-    <div className="w-full max-w-2xl mx-auto space-y-8 sm:space-y-12">
-      <div className="text-center w-full space-y-3">
-        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight">Request a Delivery</h1>
-        <p className="text-[var(--secondary-foreground)] text-base sm:text-lg">
+    <div className="w-full max-w-2xl mx-auto space-y-8">
+      <div className="text-center w-full space-y-2">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight mb-4">Request a Delivery</h1>
+        <p className="text-[var(--secondary-foreground)] text-base sm:text-lg mb-2">
           What are you craving?
         </p>
       </div>
 
-      <Card className="space-y-8 sm:space-y-10 w-full">
+      <Card className="space-y-6 w-full">
         <div className="space-y-4">
-          <label className="text-sm font-medium text-[var(--secondary-foreground)]">
+          <label className="text-sm font-medium text-[var(--secondary-foreground)] block mt-2">
             Food Type
           </label>
           <FoodTypeSelector value={foodType} onChange={setFoodType} />
@@ -280,7 +280,7 @@ export default function RequestPage() {
         />
 
         <div className="space-y-4">
-          <label className="text-sm font-medium text-[var(--secondary-foreground)]">
+          <label className="text-sm font-medium text-[var(--secondary-foreground)] block mt-2">
             Delivery Tip
           </label>
           <AmountSlider value={amount} onChange={setAmount} />
@@ -305,7 +305,7 @@ export default function RequestPage() {
 
         {error && <p className="text-sm text-[var(--danger)]">{error}</p>}
 
-        <Button onClick={handleProceedToPayment} className="w-full mt-4" size="lg">
+        <Button onClick={handleProceedToPayment} className="w-full mt-6" size="lg">
           Continue to Payment — {formatCurrency(amount)}
         </Button>
       </Card>

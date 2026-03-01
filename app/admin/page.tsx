@@ -68,11 +68,11 @@ export default function AdminPage() {
   return (
     <div className="space-y-8">
       <div className="space-y-2">
-        <h1 className="text-3xl font-bold tracking-tight">Admin Dashboard</h1>
-        <p className="text-[var(--secondary-foreground)] text-base">
+        <h1 className="text-3xl font-bold tracking-tight mb-4">Admin Dashboard</h1>
+        <p className="text-[var(--secondary-foreground)] text-base mb-2">
           {payouts.length} pending payout{payouts.length !== 1 ? 's' : ''}
         </p>
-        <div className="mt-6 p-6 rounded-[var(--radius)] bg-[var(--card)] border border-[var(--border)] text-sm text-[var(--secondary-foreground)] space-y-2">
+        <div className="mt-6 p-8 rounded-[12px] bg-[var(--card)] border border-[var(--border)] text-sm text-[var(--secondary-foreground)] space-y-2">
           <p className="font-medium text-[var(--foreground)]">How payouts work</p>
           <p>When a delivery is confirmed via OTP, the payout is automatically queued here. Send the USDC to the deliverer&apos;s wallet address, then click &quot;Mark Paid&quot;. Platform commission ({(COMMISSION_RATE * 100).toFixed(0)}%) is already deducted from the net payout shown.</p>
         </div>
@@ -84,7 +84,7 @@ export default function AdminPage() {
         </Card>
       ) : (
         payouts.map((payout) => (
-          <Card key={payout.id} className="space-y-5">
+          <Card key={payout.id} className="space-y-6">
             <div className="flex items-center justify-between">
               <div>
                 <p className="font-medium">{(payout as any).deliverer?.ns_name || 'Unknown'}</p>

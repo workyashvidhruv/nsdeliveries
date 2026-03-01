@@ -10,14 +10,14 @@ interface FoodTypeSelectorProps {
 
 export function FoodTypeSelector({ value, onChange }: FoodTypeSelectorProps) {
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-5">
+    <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
       {FOOD_TYPES.map((type) => (
         <button
           key={type}
           type="button"
           onClick={() => onChange(type)}
           className={cn(
-            'flex flex-col items-center gap-3 p-5 sm:p-6 rounded-[var(--radius)] border-2 transition-colors duration-200 min-h-[5rem]',
+            'flex flex-col items-center gap-3 p-6 rounded-[12px] border-2 transition-colors duration-200 min-h-[5rem]',
             value === type
               ? 'border-white bg-white/5'
               : 'border-[var(--border)] bg-[var(--card)] hover:border-[var(--muted)]'

@@ -100,11 +100,11 @@ export default function ActiveDeliveryPage() {
 
   if (request.status === 'delivered') {
     return (
-      <div className="w-full max-w-2xl mx-auto space-y-10">
+      <div className="w-full max-w-2xl mx-auto space-y-8">
         <div className="text-center pt-6 space-y-4">
           <span className="text-5xl sm:text-6xl">🎉</span>
-          <h1 className="text-3xl sm:text-4xl font-bold tracking-tight">Delivery Complete!</h1>
-          <p className="text-[var(--success)] text-xl sm:text-2xl font-semibold">
+          <h1 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4">Delivery Complete!</h1>
+          <p className="text-[var(--success)] text-xl sm:text-2xl font-semibold mb-2">
             You earned {formatCurrency(netPayout)}
           </p>
           <p className="text-sm text-[var(--muted)]">
@@ -116,9 +116,9 @@ export default function ActiveDeliveryPage() {
   }
 
   return (
-    <div className="w-full max-w-2xl mx-auto space-y-8 sm:space-y-10">
+    <div className="w-full max-w-2xl mx-auto space-y-8">
       <div className="space-y-5">
-        <h1 className="text-3xl sm:text-4xl font-bold tracking-tight">Active Delivery</h1>
+        <h1 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4">Active Delivery</h1>
         {request.delivery_deadline && (
           <div>
             <p className="text-sm text-[var(--secondary-foreground)] mb-2">Time remaining</p>
@@ -140,7 +140,7 @@ export default function ActiveDeliveryPage() {
           <p className="text-sm text-[var(--muted)]">{request.description}</p>
         )}
 
-        <div className="p-6 rounded-[var(--radius)] bg-white/5 border border-white/10 space-y-2">
+        <div className="p-6 rounded-[12px] bg-white/5 border border-white/10 space-y-2">
           <p className="text-sm text-[var(--secondary-foreground)]">Deliver to:</p>
           <p className="text-2xl font-bold">
             {request.building_wing}, Room {request.room_number}

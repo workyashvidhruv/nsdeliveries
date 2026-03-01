@@ -88,7 +88,7 @@ export function DeliveryBoard({ initialRequests }: DeliveryBoardProps) {
   }
 
   return (
-    <div className="space-y-5 sm:space-y-6">
+    <div className="space-y-6">
       {sortedRequests.map((req) => (
         <DeliveryCard
           key={req.id}

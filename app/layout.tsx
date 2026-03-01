@@ -26,7 +26,9 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
       </head>
       <body className="min-h-screen min-h-[100dvh] w-full flex flex-col antialiased relative">
-        <Web3Provider>{children}</Web3Provider>
+        <div className="w-full max-w-[1200px] mx-auto px-8 min-w-0 flex flex-col flex-1">
+          <Web3Provider>{children}</Web3Provider>
+        </div>
       </body>
     </html>
   );

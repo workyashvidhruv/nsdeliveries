@@ -21,7 +21,7 @@ export function DeliveryCard({ id, foodType, description, amount, buildingWing, 
         <div className="flex items-center gap-4">
           <span className="text-3xl sm:text-4xl shrink-0">{FOOD_TYPE_EMOJI[foodType]}</span>
           <div className="min-w-0">
-            <h3 className="font-semibold text-base sm:text-lg text-[var(--foreground)]">
+            <h3 className="font-semibold text-base sm:text-lg text-[var(--foreground)] mb-1">
               {FOOD_TYPE_LABELS[foodType]}
             </h3>
             {description && (

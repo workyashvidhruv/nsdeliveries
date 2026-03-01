@@ -50,15 +50,15 @@ export default function LoginPage() {
     <main className="w-full flex items-center justify-center py-8 sm:py-12">
       <div className="w-full max-w-sm sm:max-w-md space-y-8">
         <div className="text-center space-y-2">
-          <h1 className="text-2xl sm:text-3xl font-bold">Welcome back</h1>
-          <p className="text-[var(--secondary-foreground)] text-sm sm:text-base">
+          <h1 className="text-2xl sm:text-3xl font-bold mb-4">Welcome back</h1>
+          <p className="text-[var(--secondary-foreground)] text-sm sm:text-base mb-2">
             Sign in to your account
           </p>
         </div>
 
         <button
           onClick={handleGoogleSignIn}
-          className="w-full flex items-center justify-center gap-3 px-4 py-3.5 rounded-[var(--radius)] bg-white text-gray-900 font-medium hover:bg-gray-100 transition-colors duration-200 min-h-[3rem]"
+          className="w-full flex items-center justify-center gap-3 py-3.5 px-6 rounded-[12px] bg-white text-gray-900 font-medium hover:bg-gray-100 transition-colors duration-200 min-h-[3.25rem]"
         >
           <svg className="w-5 h-5" viewBox="0 0 24 24">
             <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" />
@@ -78,7 +78,7 @@ export default function LoginPage() {
           </div>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-5">
+        <form onSubmit={handleSubmit} className="space-y-6">
           <Input
             id="nsName"
             label="NS Name"
@@ -97,7 +97,7 @@ export default function LoginPage() {
 
           {error && <p className="text-sm text-[var(--danger)]">{error}</p>}
 
-          <Button type="submit" loading={loading} className="w-full" size="lg">
+          <Button type="submit" loading={loading} className="w-full mt-6" size="lg">
             Sign In
           </Button>
         </form>

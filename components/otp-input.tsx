@@ -66,7 +66,7 @@ export function OtpInput({ onSubmit, loading, error }: OtpInputProps) {
         onClick={handleSubmit}
         disabled={!isComplete}
         loading={loading}
-        className="w-full"
+        className="w-full mt-6"
         size="lg"
       >
         Verify Delivery

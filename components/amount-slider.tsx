@@ -34,7 +34,7 @@ export function AmountSlider({ value, onChange }: AmountSliderProps) {
           [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:shadow-md"
       />
 
-      <p className="text-xs text-[var(--muted)] italic">
+      <p className="text-xs text-[var(--muted)] italic mb-2">
         Higher tips increase your chances of getting a faster delivery
       </p>
     </div>

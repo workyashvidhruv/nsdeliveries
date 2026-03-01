@@ -125,16 +125,16 @@ export default function ProfilePage() {
   }
 
   return (
-    <div className="space-y-8 w-full max-w-2xl mx-auto pt-2 sm:pt-4">
+    <div className="space-y-8 w-full max-w-2xl mx-auto">
       <div className="space-y-2">
-        <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">Profile</h1>
-        <p className="text-[var(--secondary-foreground)] text-sm sm:text-base">
+        <h1 className="text-2xl sm:text-3xl font-bold tracking-tight mb-4">Profile</h1>
+        <p className="text-[var(--secondary-foreground)] text-sm sm:text-base mb-2">
           Manage your account settings
         </p>
       </div>
 
       <Card className="space-y-6">
-        <h2 className="font-semibold text-base">Delivery earnings</h2>
+        <h2 className="font-semibold text-base mb-4">Delivery earnings</h2>
         <div className="grid grid-cols-3 gap-3 text-center">
           <div>
             <p className="text-xs text-[var(--muted)] uppercase tracking-wide">Total earned</p>
@@ -155,7 +155,7 @@ export default function ProfilePage() {
       </Card>
 
       <Card className="space-y-6">
-        <h2 className="font-semibold text-base">Personal info</h2>
+        <h2 className="font-semibold text-base mb-4">Personal info</h2>
         <Input
           id="nsName"
           label="Name"
@@ -193,7 +193,7 @@ export default function ProfilePage() {
       </Card>
 
       <Card className="space-y-6">
-        <h2 className="font-semibold text-base">Crypto wallet</h2>
+        <h2 className="font-semibold text-base mb-4">Crypto wallet</h2>
         <p className="text-sm text-[var(--muted)]">
           Connect your wallet to receive delivery earnings in USDC.
         </p>
@@ -252,7 +252,7 @@ export default function ProfilePage() {
         </p>
       )}
 
-      <div className="space-y-4">
+      <div className="space-y-4 mt-6">
         <Button onClick={handleSave} loading={saving} className="w-full" size="lg">
           Save profile
         </Button>
