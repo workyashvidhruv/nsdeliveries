@@ -1,0 +1,88 @@
+@import "tailwindcss";
+
+:root {
+  --background: #0f0f11;
+  --foreground: #f4f4f5;
+  --card: #18181b;
+  --card-hover: #27272a;
+  --border: #27272a;
+  --primary: #ffffff;
+  --primary-hover: #e4e4e7;
+  --primary-foreground: #0f0f11;
+  --secondary: #18181b;
+  --secondary-foreground: #a1a1aa;
+  --accent: #71717a;
+  --success: #22c55e;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+  --muted: #71717a;
+  --radius: 12px;
+  --radius-sm: 8px;
+  --spacing-page: clamp(1.5rem, 4vw, 2.5rem);
+  --content-max: 42rem;
+  --safe-left: env(safe-area-inset-left, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+  --page-padding-left: max(var(--spacing-page), var(--safe-left));
+  --page-padding-right: max(var(--spacing-page), var(--safe-right));
+  --nav-height: 3.75rem;
+  --nav-total-height: calc(env(safe-area-inset-top, 0px) + var(--nav-height));
+  --main-pt: calc(var(--nav-total-height) + 0.75rem);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  width: 100%;
+  min-height: 100%;
+  height: 100%;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: 'DM Sans', 'Inter', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  width: 100%;
+  min-width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow-x: hidden;
+  padding-left: var(--safe-left);
+  padding-right: var(--safe-right);
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(120, 119, 198, 0.08), transparent),
+    radial-gradient(ellipse 60% 40% at 100% 100%, rgba(34, 197, 94, 0.04), transparent);
+  pointer-events: none;
+  z-index: 0;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted);
+}
