@@ -62,11 +62,11 @@ export default function SignUpPage() {
   };
 
   return (
-    <main className="min-h-[100dvh] w-full flex items-center justify-center px-[var(--spacing-page)] py-12 relative z-10">
+    <main className="w-full flex items-center justify-center py-8 sm:py-12">
       <div className="w-full max-w-sm sm:max-w-md space-y-8">
-        <div className="text-center">
+        <div className="text-center space-y-2">
           <h1 className="text-2xl sm:text-3xl font-bold">Create an account</h1>
-          <p className="text-[var(--secondary-foreground)] mt-2 text-sm sm:text-base">
+          <p className="text-[var(--secondary-foreground)] text-sm sm:text-base">
             Sign up to start requesting or delivering food
           </p>
         </div>
@@ -132,7 +132,7 @@ export default function SignUpPage() {
           </Button>
         </form>
 
-        <p className="text-center text-sm text-[var(--muted)] pt-2">
+        <p className="text-center text-sm text-[var(--muted)] pt-4">
           Already have an account?{' '}
           <Link href="/login" className="text-white hover:underline">
             Sign in

@@ -2,8 +2,8 @@ import Link from 'next/link';
 
 export default function HomePage() {
   return (
-    <main className="min-h-[100dvh] w-full flex flex-col items-center justify-center pl-[var(--page-padding-left)] pr-[var(--page-padding-right)] py-12 relative z-10 overflow-x-hidden">
-      <div className="text-center w-full max-w-md space-y-14 mx-auto flex flex-col items-center">
+    <main className="min-h-[100dvh] w-full flex flex-col items-center justify-center pl-[var(--page-padding-left)] pr-[var(--page-padding-right)] py-12 sm:py-16 relative z-10 overflow-x-hidden">
+      <div className="text-center w-full max-w-[var(--content-max)] mx-auto flex flex-col items-center px-4 sm:px-6 space-y-14">
         <div className="space-y-6 w-full flex flex-col items-center">
           <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white text-center w-full">
             NS Deliveries
@@ -13,7 +13,7 @@ export default function HomePage() {
           </p>
         </div>
 
-        <div className="grid gap-5 pt-4 w-full">
+        <div className="grid gap-5 pt-4 w-full max-w-md">
           <Link
             href="/request"
             className="flex items-center justify-center min-h-[3.25rem] px-8 py-4 rounded-[var(--radius)] bg-white text-[var(--primary-foreground)] font-semibold text-base hover:bg-[var(--primary-hover)] transition-colors duration-200 active:scale-[0.98]"

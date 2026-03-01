@@ -79,10 +79,10 @@ export function DeliveryBoard({ initialRequests }: DeliveryBoardProps) {
 
   if (sortedRequests.length === 0) {
     return (
-      <div className="text-center py-12 flex flex-col items-center justify-center min-h-[16rem]">
-        <p className="text-5xl sm:text-6xl mb-6">&#127869;</p>
+      <div className="text-center py-14 sm:py-16 flex flex-col items-center justify-center min-h-[18rem] space-y-4">
+        <p className="text-5xl sm:text-6xl">&#127869;</p>
         <p className="text-[var(--muted)] text-lg sm:text-xl">No delivery requests right now</p>
-        <p className="text-[var(--muted)] text-sm mt-3">Check back in a bit!</p>
+        <p className="text-[var(--muted)] text-sm">Check back in a bit!</p>
       </div>
     );
   }

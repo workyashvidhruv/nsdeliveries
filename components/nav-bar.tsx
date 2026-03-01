@@ -16,7 +16,7 @@ export function NavBar() {
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-[var(--background)]/95 backdrop-blur-md border-b border-[var(--border)] pt-[env(safe-area-inset-top,0)]">
-      <div className="h-[var(--nav-height)] w-full max-w-[100vw] pl-[var(--page-padding-left)] pr-[var(--page-padding-right)] flex items-center justify-between gap-3 min-w-0 box-border">
+      <div className="min-h-[var(--nav-height)] w-full max-w-[100vw] flex items-center justify-between gap-3 min-w-0 box-border pl-[max(1.5rem,var(--page-padding-left))] pr-[max(1.5rem,var(--page-padding-right))] py-3">
         <Link
           href="/"
           className="text-lg font-semibold tracking-tight text-[var(--foreground)] shrink-0 min-w-0 truncate hover:opacity-90 transition-opacity"

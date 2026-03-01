@@ -82,7 +82,7 @@ export default function ActiveDeliveryPage() {
 
   if (loading) {
     return (
-      <div className="py-16 flex justify-center">
+      <div className="w-full max-w-2xl mx-auto py-16 flex justify-center">
         <div className="animate-spin h-10 w-10 border-2 border-[var(--primary)] border-t-transparent rounded-full" />
       </div>
     );
@@ -90,7 +90,7 @@ export default function ActiveDeliveryPage() {
 
   if (!request) {
     return (
-      <div className="py-16 text-center">
+      <div className="w-full max-w-2xl mx-auto py-16 text-center">
         <p className="text-[var(--muted)]">Delivery not found</p>
       </div>
     );
@@ -100,14 +100,14 @@ export default function ActiveDeliveryPage() {
 
   if (request.status === 'delivered') {
     return (
-      <div className="space-y-10">
-        <div className="text-center pt-6">
+      <div className="w-full max-w-2xl mx-auto space-y-10">
+        <div className="text-center pt-6 space-y-4">
           <span className="text-5xl sm:text-6xl">🎉</span>
-          <h1 className="text-3xl sm:text-4xl font-bold tracking-tight mt-6">Delivery Complete!</h1>
-          <p className="text-[var(--success)] text-xl sm:text-2xl font-semibold mt-4">
+          <h1 className="text-3xl sm:text-4xl font-bold tracking-tight">Delivery Complete!</h1>
+          <p className="text-[var(--success)] text-xl sm:text-2xl font-semibold">
             You earned {formatCurrency(netPayout)}
           </p>
-          <p className="text-sm text-[var(--muted)] mt-3">
+          <p className="text-sm text-[var(--muted)]">
             Your payout will be sent to your wallet shortly.
           </p>
         </div>
@@ -116,11 +116,11 @@ export default function ActiveDeliveryPage() {
   }
 
   return (
-    <div className="space-y-10">
-      <div>
+    <div className="w-full max-w-2xl mx-auto space-y-8 sm:space-y-10">
+      <div className="space-y-5">
         <h1 className="text-3xl sm:text-4xl font-bold tracking-tight">Active Delivery</h1>
         {request.delivery_deadline && (
-          <div className="mt-5">
+          <div>
             <p className="text-sm text-[var(--secondary-foreground)] mb-2">Time remaining</p>
             <Countdown deadline={request.delivery_deadline} />
           </div>

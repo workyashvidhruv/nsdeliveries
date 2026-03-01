@@ -46,6 +46,7 @@ export default function RequestPage() {
   // Wagmi hooks
   const { address, isConnected } = useAccount();
   const { connectAsync, connectors } = useConnect();
+  const coinbaseConnector = connectors.find((c) => c.name.toLowerCase().includes('coinbase')) ?? null;
   const { disconnect } = useDisconnect();
   const { writeContractAsync } = useWriteContract();
 
@@ -134,10 +135,10 @@ export default function RequestPage() {
     const usdcAmount = (amount / 100).toFixed(2);
 
     return (
-      <div className="w-full max-w-2xl mx-auto space-y-8 sm:space-y-12 px-0">
-        <div className="text-center w-full">
+      <div className="w-full max-w-2xl mx-auto space-y-8 sm:space-y-12">
+        <div className="text-center w-full space-y-3">
           <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight">Pay to Post Request</h1>
-          <p className="text-[var(--secondary-foreground)] mt-3 text-base sm:text-lg">
+          <p className="text-[var(--secondary-foreground)] text-base sm:text-lg">
             {usdcAmount} USDC on Base
           </p>
         </div>
@@ -151,25 +152,24 @@ export default function RequestPage() {
           {!manualMode ? (
             <div className="space-y-4">
               {!isConnected ? (
-                <div className="space-y-3">
-                  {connectors.map((connector) => (
-                    <Button
-                      key={connector.uid}
-                      onClick={async () => {
-                        setError('');
-                        try {
-                          await connectAsync({ connector });
-                        } catch (err: any) {
-                          setError(err?.shortMessage || err?.message || 'Failed to connect wallet');
-                        }
-                      }}
-                      className="w-full"
-                      size="lg"
-                    >
-                      Connect {connector.name}
-                    </Button>
-                  ))}
-                </div>
+                coinbaseConnector ? (
+                  <Button
+                    className="w-full"
+                    size="lg"
+                    onClick={async () => {
+                      setError('');
+                      try {
+                        await connectAsync({ connector: coinbaseConnector });
+                      } catch (err: unknown) {
+                        setError(err instanceof Error ? err.message : 'Failed to connect wallet');
+                      }
+                    }}
+                  >
+                    Connect Coinbase Wallet
+                  </Button>
+                ) : (
+                  <p className="text-sm text-[var(--muted)]">Coinbase Wallet is required to pay. Install it or open in a supported browser.</p>
+                )
               ) : (
                 <div className="space-y-4">
                   <div className="flex items-center justify-between text-sm">
@@ -255,15 +255,15 @@ export default function RequestPage() {
   }
 
   return (
-    <div className="w-full max-w-2xl mx-auto space-y-8 sm:space-y-12 px-0">
-      <div className="text-center w-full">
+    <div className="w-full max-w-2xl mx-auto space-y-8 sm:space-y-12">
+      <div className="text-center w-full space-y-3">
         <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight">Request a Delivery</h1>
-        <p className="text-[var(--secondary-foreground)] mt-3 text-base sm:text-lg">
+        <p className="text-[var(--secondary-foreground)] text-base sm:text-lg">
           What are you craving?
         </p>
       </div>
 
-      <Card className="space-y-10 w-full">
+      <Card className="space-y-8 sm:space-y-10 w-full">
         <div className="space-y-4">
           <label className="text-sm font-medium text-[var(--secondary-foreground)]">
             Food Type
@@ -286,7 +286,7 @@ export default function RequestPage() {
           <AmountSlider value={amount} onChange={setAmount} />
         </div>
 
-        <div className="grid grid-cols-2 gap-5">
+        <div className="grid grid-cols-2 gap-4 sm:gap-5">
           <Input
             id="buildingWing"
             label="Building Wing *"
@@ -305,7 +305,7 @@ export default function RequestPage() {
 
         {error && <p className="text-sm text-[var(--danger)]">{error}</p>}
 
-        <Button onClick={handleProceedToPayment} className="w-full mt-2" size="lg">
+        <Button onClick={handleProceedToPayment} className="w-full mt-4" size="lg">
           Continue to Payment — {formatCurrency(amount)}
         </Button>
       </Card>

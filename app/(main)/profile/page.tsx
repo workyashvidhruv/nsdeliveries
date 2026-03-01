@@ -118,22 +118,22 @@ export default function ProfilePage() {
 
   if (loading) {
     return (
-      <div className="py-16 flex justify-center">
+      <div className="w-full max-w-2xl mx-auto py-16 flex justify-center">
         <div className="animate-spin h-10 w-10 border-2 border-[var(--primary)] border-t-transparent rounded-full" />
       </div>
     );
   }
 
   return (
-    <div className="space-y-8 w-full max-w-2xl mx-auto pt-4">
-      <div className="space-y-1">
+    <div className="space-y-8 w-full max-w-2xl mx-auto pt-2 sm:pt-4">
+      <div className="space-y-2">
         <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">Profile</h1>
         <p className="text-[var(--secondary-foreground)] text-sm sm:text-base">
           Manage your account settings
         </p>
       </div>
 
-      <Card className="space-y-5">
+      <Card className="space-y-6">
         <h2 className="font-semibold text-base">Delivery earnings</h2>
         <div className="grid grid-cols-3 gap-3 text-center">
           <div>
@@ -247,12 +247,12 @@ export default function ProfilePage() {
       </Card>
 
       {message && (
-        <p className={cn('text-sm text-center py-1', message.includes('Failed') || message.includes('failed') ? 'text-[var(--danger)]' : 'text-[var(--success)]')}>
+        <p className={cn('text-sm text-center py-2', message.includes('Failed') || message.includes('failed') ? 'text-[var(--danger)]' : 'text-[var(--success)]')}>
           {message}
         </p>
       )}
 
-      <div className="space-y-3">
+      <div className="space-y-4">
         <Button onClick={handleSave} loading={saving} className="w-full" size="lg">
           Save profile
         </Button>

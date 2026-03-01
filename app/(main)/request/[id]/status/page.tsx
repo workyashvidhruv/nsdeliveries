@@ -59,7 +59,7 @@ export default function RequestStatusPage() {
 
   if (loading) {
     return (
-      <div className="py-16 flex justify-center">
+      <div className="w-full max-w-2xl mx-auto py-16 flex justify-center">
         <div className="animate-spin h-10 w-10 border-2 border-[var(--primary)] border-t-transparent rounded-full" />
       </div>
     );
@@ -67,7 +67,7 @@ export default function RequestStatusPage() {
 
   if (!request) {
     return (
-      <div className="py-16 text-center">
+      <div className="w-full max-w-2xl mx-auto py-16 text-center">
         <p className="text-[var(--muted)]">Request not found</p>
       </div>
     );
@@ -84,10 +84,10 @@ export default function RequestStatusPage() {
   const status = statusConfig[request.status];
 
   return (
-    <div className="space-y-10">
-      <div className="text-center pt-6">
+    <div className="w-full max-w-2xl mx-auto space-y-8 sm:space-y-10">
+      <div className="text-center pt-6 space-y-6">
         <span className="text-5xl sm:text-6xl">{status.icon}</span>
-        <h1 className="text-3xl sm:text-4xl font-bold tracking-tight mt-6">{status.label}</h1>
+        <h1 className="text-3xl sm:text-4xl font-bold tracking-tight">{status.label}</h1>
       </div>
 
       <Card className="space-y-6">
@@ -123,7 +123,7 @@ export default function RequestStatusPage() {
 
       {request.status === 'open' && (
         <Card>
-          <div className="text-center space-y-5 py-6">
+          <div className="text-center space-y-6 py-6">
             <div className="animate-pulse flex justify-center">
               <div className="w-16 h-16 rounded-full bg-white/10 flex items-center justify-center">
                 <span className="text-3xl">🔍</span>
